@@ -1,0 +1,10 @@
+potato
+tomato
+spaghetti
+meatball
+apple
+banana
+watermelon
+strawberry
+blackberry
+avocado
