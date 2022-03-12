@@ -27,7 +27,7 @@ public class Dictionary {
                 case "1":
                     BufferedReader reader = new BufferedReader(new FileReader("src/main/java/dictionary.txt"));
                     while ((word = reader.readLine()) != null) {
-                         dictionary.root = dictionary.insert(dictionary.root, word);
+                         dictionary.insert(word);
                     }
                     reader.close();
                     System.out.println("Dictionary Loaded!");
@@ -39,7 +39,7 @@ public class Dictionary {
                     break;
                 case "3":
                     word = scanner.nextLine();
-                    dictionary.root = dictionary.insert(dictionary.root, word);
+                    dictionary.insert(word);
                     System.out.println("Insertion done!");
                     break;
                 case "4":

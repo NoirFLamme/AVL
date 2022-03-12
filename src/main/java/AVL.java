@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 import static java.lang.Math.*;
 
 class Node{
@@ -40,28 +38,26 @@ class AVL {
         current.height = max(getHeight(current.left), getHeight(current.right)) + 1;
         nRoot.height =  max(getHeight(nRoot.left), getHeight(nRoot.right)) + 1;
 
-
         return nRoot;
     }
 
     Node leftRotation(Node current)
     {
-
         Node nRoot = current.right;
-
         current.right = nRoot.left;
-
-
         nRoot.left = current;
 
         current.height = max(getHeight(current.left), getHeight(current.right)) + 1;
         nRoot.height =  max(getHeight(nRoot.left), getHeight(nRoot.right)) + 1;
 
-
         return nRoot;
     }
 
-    Node insert(Node node, String value)
+    void insert(String value) {
+        this.root = insertAndReturnRoot(this.root, value);
+    }
+
+    private Node insertAndReturnRoot(Node node, String value)
     {
         if (node == null)
         {
@@ -70,11 +66,11 @@ class AVL {
 
         if (value.compareTo(node.value) < 0)
         {
-            node.left = insert(node.left, value);
+            node.left = insertAndReturnRoot(node.left, value);
         }
         else if(value.compareTo(node.value) > 0)
         {
-            node.right = insert(node.right, value);
+            node.right = insertAndReturnRoot(node.right, value);
         }
         else
             return node;
@@ -152,7 +148,7 @@ class AVL {
     {
         if(root == null)
         {
-            return root;
+            return null;
         }
 
         if (value.compareTo(root.value) < 0)
@@ -224,25 +220,23 @@ class AVL {
     Node lowestNode(Node root)
     {
         Node temp = root;
-        while (root.left != null)
+        while (temp.left != null)
         {
             temp = root.left;
         }
-
         return temp;
-
     }
 
     public static void main(String[] args)
     {
         AVL tree = new AVL();
 
-        tree.root = tree.insert(tree.root, "10");
-        tree.root = tree.insert(tree.root, "20");
-        tree.root = tree.insert(tree.root, "30");
-        tree.root = tree.insert(tree.root, "40");
-        tree.root = tree.insert(tree.root, "50");
-        tree.root = tree.insert(tree.root, "25");
+        tree.insert("10");
+        tree.insert( "20");
+        tree.insert( "30");
+        tree.insert( "40");
+        tree.insert( "50");
+        tree.insert("25");
         int yes = tree.search(tree.root, "5");
         tree.root = tree.delete(tree.root, "30");
         System.out.println(tree.getHeight(tree.root));
